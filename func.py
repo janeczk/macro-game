@@ -12,6 +12,55 @@ from const import *
 from const import GameState as game_state # dla ulatwienia pisania kodu
 
 
+def sellItemsuTuni():# funkcja typowo brute-force, za duzo liczenia i opracowywania roznych map
+    click(180 + randomPos(), 400 + randomPos())  # przejście do domu Tuni
+    findPlayer(492, 755)
+    click(1275 + randomPos(), 808 + randomPos())  # klik na Tunię
+    findPlayer(438, 602)
+    
+    pag.keyDown('1')  # wejście w dialog
+    time.sleep(wait()[0] / 15)
+    pag.keyUp('1')
+    time.sleep(wait()[0] / 5)
+    
+    clearBag(1420, 789)  # sprzedanie torby 1
+    clearBag(1461, 798)  # sprzedanie torby 2
+    clearBag(1419, 842)  # sprzedanie torby 3
+    
+    pag.keyDown('esc')  # zamknięcie dialogu
+    time.sleep(wait()[0] / 15)
+    pag.keyUp('esc')
+    
+    click(492 + randomPos(), 755 + randomPos())  # klik na exit
+    time.sleep(wait()[0])
+
+    findPlayer(172, 401)  # sprawdzanie czy przeszedł
+    click(418 + randomPos(), 257 + randomPos())  # klik na exit
+    time.sleep(wait()[0])
+
+    findPlayer(418, 791)
+    click(290 + randomPos(), 257 + randomPos())  # klik na exit
+    time.sleep(wait()[0])
+
+    findPlayer(299, 791)
+    click(11 + randomPos(), 614 + randomPos())  # klik na exit
+
+
+def clearBag(x,y):
+    for i in range(2):
+        click(x+randomPos(),y+randomPos())
+        time.sleep(wait()[0])
+        click(1459+randomPos(),986+randomPos())
+        time.sleep(wait()[0])
+
+def findPlayer(x,y):
+    while True:
+        if  pag.pixelMatchesColor(int(x),int(y),const.playerColor,tolerance=15) or \
+            pag.pixelMatchesColor(int(x+8.5),int(y),const.playerColor,tolerance=15) or\
+            pag.pixelMatchesColor(int(x-8.5),int(y),const.playerColor,tolerance=15):
+            break
+    print("player found!")
+    time.sleep(0.3+wait()[0])
 
 def click(x,y):
     pag.moveTo((x,y))
@@ -21,8 +70,13 @@ def click(x,y):
 
 def attackMob():
     pag.keyDown('e')
-    time.sleep(wait()[0]/10)
+    time.sleep(wait()[0]/15)
     pag.keyUp('e')
+
+def tpKwiaty():
+    pag.keyDown('4')
+    time.sleep(wait()[0]/10)
+    pag.keyUp('4')
 
 def wait():
     x = np.random.normal(0.5,0.3,1)
@@ -89,13 +143,18 @@ def clearMap(game_state,currentMap,nextMap):
         if goToClosest(map_properties.getMobLocations(),game_state):
             pag.moveTo(1200 + randomPos() * 10, 1000 + randomPos() * 10)
             FindPlayer(game_state)
-            time.sleep(wait()[0])
+            time.sleep(wait()[0]/5)
             attackMob()
-            time.sleep(0.2+wait()[0])
+            time.sleep(0.4+wait()[0]/10)
         else:
+            if currentMap == "Rozlewisko Kai": #wyjatek dla trasy, teleportujacy na kwiaty i sprzedjacy itemy
+                tpKwiaty()
+                game_state.setGameState({"map_name": nextMap}) #aktualizacja info
+                currentMap = nextMap
+                return nextMap
+            
             click(map_properties.getStartMiniMap()[0] + (map_properties.getNextMapCoords()[0]+0.5) * game_state.mapSize.getStepX() + randomPos(),
-                  map_properties.getStartMiniMap()[1] + (map_properties.getNextMapCoords()[1]+0.5) * game_state.mapSize.getStepY() + randomPos()
-                  )
+                  map_properties.getStartMiniMap()[1] + (map_properties.getNextMapCoords()[1]+0.5) * game_state.mapSize.getStepY() + randomPos())
             pag.moveTo(1200 + randomPos() * 10, 1000 + randomPos() * 10)
             game_state.setGameState({"map_name": nextMap})
             currentMap = nextMap

@@ -11,48 +11,49 @@ import matplotlib.pyplot as plt # type: ignore
 import func
 import const
 import threading
-
+import keyboard
 
 
 
 #"""        
-
 running = True
 
 def monitor_exit_key():
     global running
     while running:
-        if keyboard.is_pressed('F7'):
+        if keyboard.is_pressed('y'):
             running = False
-            print("Program zatrzymany")
+            print("Zatrzymanie gry...")
             break
-        time.sleep(0.01)  # Zmniejszenie obciążenia CPU
+        time.sleep(0.1)
 
 def main():
     global running
+    
     # Uruchomienie wątku monitorującego klawisz 'y'
     exit_thread = threading.Thread(target=monitor_exit_key)
     exit_thread.start()
-    time.sleep(5)
+
+    # Ustawienie początkowego stanu gry
+    game_state = const.GameState()
+    game_state.setGameState({"map_name": "Gvar Hamryd",})
+    print(game_state.getGameState())
 
     while running:
-        x, y = func.GetMob()
-        if x == -1:
-            a = random.randint(205, 980)
-            b = random.randint(200, 1350)
-            pag.click(a, b)
-            time.sleep(func.wait()[0] * 3)
-        else:
-            time.sleep(func.wait()[0])
-            pag.click(x + random.randint(-40, 40) / 10, y + random.randint(-40, 40) / 10)
-            pyautogui.moveTo(1300 + func.randomPos() * 1000, 700 + func.randomPos() * 1000)
-            func.CheckPlayer(x, y)
-            time.sleep(func.wait()[0] / 5)
-            pyautogui.keyDown('e')
-            time.sleep(func.wait()[0] / 10)
-            pyautogui.keyUp('e')
-            time.sleep(func.wait()[0] / 2)
-    
+        # Sekwencja działań dla kolejnych map
+        game_state.current_map.setMapName(func.clearMap(game_state, "Gvar Hamryd", "Matecznik Szelestu")) # Czyszczenie Gvar Hamryd
+        func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state) # Sprawdzanie wejścia w Mateczniku
+
+        game_state.current_map.setMapName(func.clearMap(game_state, "Matecznik Szelestu", "Rozlewisko Kai")) # Czyszczenie Matecznika
+        func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state) # Sprawdzanie wejścia w Liściastych
+
+        game_state.current_map.setMapName(func.clearMap(game_state, "Rozlewisko Kai", "Gvar Hamryd")) # Czyszczenie Rozlewiska Kai
+        func.sellItemsuTuni() # Sprzedaż przedmiotów u Tuni
+        func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state) # Sprawdzanie wejścia w Gvar Hamryd
+
+        if not running:  # W razie zatrzymania gry przez naciśnięcie 'y'
+            break
+
     # Zatrzymanie wątku monitorującego po zakończeniu głównej pętli
     exit_thread.join()
 

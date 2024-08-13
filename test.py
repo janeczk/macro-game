@@ -23,10 +23,13 @@ func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()
 game_state.current_map.setMapName(func.clearMap(game_state,"Matecznik Szelestu","Rozlewisko Kai"))#czyszczenie Matecznika
 
 
-#odtad zaczynasz kurwo robote
 func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)#sprawdzanie wejscia w Lisciastych
 
 game_state.current_map.setMapName(func.clearMap(game_state,"Rozlewisko Kai","Gvar Hamryd"))#
+func.sellItemsuTuni()
+func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)#sprawdzanie wejscia w Gvar Hamryd
+
+
 
 
 #game_state.current_map.setMapName("Matecznik Szelestu")#debug
