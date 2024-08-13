@@ -236,8 +236,7 @@ class GameState:
         }
     def setGameState(self, game_state):
         self.current_map.setMapName(game_state["map_name"])
-        self.player_coords.setPlayerXY(game_state["player_coords"][0], game_state["player_coords"][1])
-        self.mob_coords.setMobXY(game_state["mob_coords"][0], game_state["mob_coords"][1])
+
 
         current_map_properties = map_data.get(game_state["map_name"])
 

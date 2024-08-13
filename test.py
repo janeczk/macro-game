@@ -13,25 +13,20 @@ import const
 import threading
 from const import GameState as game_state # dla ulatwienia pisania kodu
 
-starting_state ={
-    "map_name": "Gvar Hamryd",
-    "player_coords": [63, 42],
-    "mob_coords": [0, 0],
-}
 game_state = const.GameState()
-game_state.setGameState(starting_state)
+game_state.setGameState({"map_name": "Gvar Hamryd",})
 print(game_state.getGameState())
 
 game_state.current_map.setMapName(func.clearMap(game_state,"Gvar Hamryd","Matecznik Szelestu")) #czyszenie Gvar Hamryd
 func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)#sprawdzanie wejscia w Mateczniku
 
-game_state.current_map.setMapName(func.clearMap(game_state,"Matecznik Szelestu","Liściaste Rozstaje"))#czyszczenie Matecznika
+game_state.current_map.setMapName(func.clearMap(game_state,"Matecznik Szelestu","Rozlewisko Kai"))#czyszczenie Matecznika
 
 
 #odtad zaczynasz kurwo robote
 func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)#sprawdzanie wejscia w Lisciastych
 
-game_state.current_map.setMapName(func.clearMap(game_state,"Liściaste Rozstaje","Gvar Hamryd"))#
+game_state.current_map.setMapName(func.clearMap(game_state,"Rozlewisko Kai","Gvar Hamryd"))#
 
 
 #game_state.current_map.setMapName("Matecznik Szelestu")#debug

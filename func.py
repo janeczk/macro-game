@@ -97,6 +97,7 @@ def clearMap(game_state,currentMap,nextMap):
                   map_properties.getStartMiniMap()[1] + (map_properties.getNextMapCoords()[1]+0.5) * game_state.mapSize.getStepY() + randomPos()
                   )
             pag.moveTo(1200 + randomPos() * 10, 1000 + randomPos() * 10)
+            game_state.setGameState({"map_name": nextMap})
             currentMap = nextMap
             return nextMap
 
