@@ -60,8 +60,11 @@ def main():
 if __name__ == "__main__":
     main()
 #"""       
-
-
+##########################DO DEBUGOWANIA#############################
+##threading 
+##przejscia w funkcji u tuni
+##rozpoczynanie routow
+##srodek mobka sprawdzac
     
 """
 time.sleep(5)
