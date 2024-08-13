@@ -64,7 +64,7 @@ map_data = {
             ,[58,8],[24,6],[19,5],[50,83],[17,44]],
         next_map_coords=[23, 0]  
     ),
-    "Liściaste Rozstaje": MapProperties(
+    "Rozlewisko Kai": MapProperties(
         start_coords=[7, 253],
         end_coords=[820, 796],
         map_size=[96, 64],

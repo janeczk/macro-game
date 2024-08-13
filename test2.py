@@ -24,7 +24,7 @@ for i in const.driadyMS:
 """
 
 game_state = const.GameState()
-game_state.setGameState({"map_name": "Liściaste Rozstaje",})
+game_state.setGameState({"map_name": "Rozlewisko Kai",})
 func.FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)#sprawdzanie wejscia w Lisciastych
 
-game_state.current_map.setMapName(func.clearMap(game_state,"Liściaste Rozstaje","Gvar Hamryd"))#
+game_state.current_map.setMapName(func.clearMap(game_state,"Rozlewisko Kai","Gvar Hamryd"))#
