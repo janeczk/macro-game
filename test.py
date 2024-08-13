@@ -8,7 +8,7 @@ import random
 import sys
 import win32api, win32con # type: ignore
 import matplotlib.pyplot as plt # type: ignore
-import func
+import func#dupa
 import const
 import threading
 from const import GameState as game_state # dla ulatwienia pisania kodu
