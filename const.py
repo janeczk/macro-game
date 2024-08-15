@@ -7,6 +7,11 @@
 ##: Matecznik szelesu: 
 ##: te same wymiary minimapy i pixeli
 
+###############POPRAWKI KAKTUS################
+#klasy z DuzychlLiter
+# nazyw funkcji i zmiennych snake_case
+# funkcja od przeliczania coordynatow na pixele
+
 
 class MapProperties:
     def __init__(self, start_coords, end_coords, map_size, transitions, mob_locations, next_map_coords):
@@ -236,7 +241,6 @@ class GameState:
         }
     def setGameState(self, game_state):
         self.current_map.setMapName(game_state["map_name"])
-
 
         current_map_properties = map_data.get(game_state["map_name"])
 

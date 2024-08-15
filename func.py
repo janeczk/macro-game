@@ -62,6 +62,11 @@ def findPlayer(x,y):
     print("player found!")
     time.sleep(0.3+wait()[0])
 
+def tpKwiaty():
+    pag.keyDown('4')
+    time.sleep(wait()[0]/10)
+    pag.keyUp('4')
+
 def click(x,y):
     pag.moveTo((x,y))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
@@ -73,10 +78,7 @@ def attackMob():
     time.sleep(wait()[0]/15)
     pag.keyUp('e')
 
-def tpKwiaty():
-    pag.keyDown('4')
-    time.sleep(wait()[0]/10)
-    pag.keyUp('4')
+
 
 def wait():
     x = np.random.normal(0.5,0.3,1)
@@ -93,7 +95,11 @@ def randomPos():
 def FindPlayerAtEntrance(passage,game_state):
     while True:
         for i in passage:
-            x, y = game_state.startMiniMap.getStartMiniMap()[0] + (i[0]+0.5) * game_state.mapSize.getStepX() , game_state.startMiniMap.getStartMiniMap()[1] + (i[1]+0.5) * game_state.mapSize.getStepY()
+            x_start_coord = game_state.startMiniMap.getStartMiniMap()[0]
+            y_start_coord = game_state.startMiniMap.getStartMiniMap()[1]
+            x_passage_coord_center = (i[0]+0.5)
+            y_passage_coord_center = (i[1]+0.5)
+            x, y = x_start_coord + x_passage_coord_center * game_state.mapSize.getStepX() , y_start_coord + y_passage_coord_center * game_state.mapSize.getStepY()
             if pag.pixelMatchesColor(int(x),int(y),const.playerColor,tolerance=15):
                 game_state.player_coords.setPlayerXY(i[0],i[1])
                 print(f"Player found at entrance at: {game_state.player_coords.getPlayerXY()} at map {game_state.current_map.getMapName()}")
@@ -160,9 +166,11 @@ def clearMap(game_state,currentMap,nextMap):
             currentMap = nextMap
             return nextMap
 
+
+
 def goToClosest(passage,game_state):
     shortestPathCords = FindShortestCords(passage,game_state)
-    if shortestPathCords == False:
+    if not shortestPathCords:
        return 0
     game_state.mob_coords.setMobXY(shortestPathCords[0],shortestPathCords[1])
     x,y = game_state.startMiniMap.getStartMiniMap()[0] + (game_state.mob_coords.getMobX()+0.5) * game_state.mapSize.getStepX() + randomPos() , game_state.startMiniMap.getStartMiniMap()[1] + (game_state.mob_coords.getMobY()+0.5) * game_state.mapSize.getStepY() + randomPos()
