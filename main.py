@@ -85,8 +85,6 @@ if __name__ == "__main__":
 #"""       
 ##########################DO DEBUGOWANIA#############################
 ##threading 
-##przejscia w funkcji u tuni#naprawione, do testow
-##rozpoczynanie routow
     
 """
 time.sleep(5)

@@ -8,9 +8,7 @@
 ##: te same wymiary minimapy i pixeli
 
 ###############POPRAWKI KAKTUS################
-#klasy z DuzychlLiter
-# nazyw funkcji i zmiennych snake_case
-# funkcja od przeliczania coordynatow na pixele
+##
 
 
 class MapProperties:

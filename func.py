@@ -97,10 +97,10 @@ def transfer_coords_to_pixels_XY(coords,game_state):#coords = [x,y]
 def find_player_at_passage(passage,game_state):
     print("Waiting for player to show at the entrance in:", game_state.current_map.getMapName())
     while True:
-        for XYcoords in passage:
-            x, y = transfer_coords_to_pixels_XY(XYcoords,game_state)
+        for XY_coords in passage:
+            x, y = transfer_coords_to_pixels_XY(XY_coords,game_state)
             if pag.pixelMatchesColor(int(x),int(y),player_color,tolerance=15):
-                game_state.player_coords.setPlayerXY(XYcoords[0],XYcoords[1])
+                game_state.player_coords.setPlayerXY(XY_coords[0],XY_coords[1])
                 print(f"Player found at entrance at: {game_state.player_coords.getPlayerXY()} at map {game_state.current_map.getMapName()}")
                 return
         time.sleep(0.2)
@@ -151,7 +151,7 @@ def clear_map_and_go_to_next_map(game_state,current_map,next_map):
     while game_state.current_map.getMapName() == current_map:
         if go_to_closest(map_properties.getMobLocations(),game_state):
             pag.moveTo(1200 + random_pos() * 10, 1000 + random_pos() * 10)
-            find_player(game_state)
+            find_player_near_mob(game_state)
             time.sleep(wait()[0]/2)
             attack_mob()
             time.sleep(0.4+wait()[0]/10)
@@ -180,7 +180,7 @@ def go_to_closest(passage,game_state):
     pag.click(x+random_pos(),y+random_pos())
     return 1
 
-def find_player(game_state):
+def find_player_near_mob(game_state):
     print("Waiting for player")
     while True:
         x,y = transfer_coords_to_pixels_XY(game_state.mob_coords.getMobXY(),game_state)
