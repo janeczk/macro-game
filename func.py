@@ -102,8 +102,9 @@ def find_player_at_passage(passage,game_state):
             if pag.pixelMatchesColor(int(x),int(y),player_color,tolerance=15):
                 game_state.player_coords.setPlayerXY(XY_coords[0],XY_coords[1])
                 print(f"Player found at entrance at: {game_state.player_coords.getPlayerXY()} at map {game_state.current_map.getMapName()}")
+                time.sleep(0.6+wait()[0])
                 return
-        time.sleep(0.5+wait()[0])
+        time.sleep(0.2)
 
 
 def path_length(x1,y1,x2,y2):
