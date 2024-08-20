@@ -54,8 +54,6 @@ def start_game():
         sell_items_tunia()
         find_player_at_passage(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
 
-        if not running:
-            break
 
     exit_thread.join()
 

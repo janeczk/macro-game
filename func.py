@@ -25,7 +25,7 @@ def sell_items_tunia():# funkcja typowo brute-force, za duzo liczenia i opracowy
     clear_bag(1420, 789)  # sprzedanie torby 1
     clear_bag(1461, 798)  # sprzedanie torby 2
     clear_bag(1419, 842)  # sprzedanie torby 3
-    
+    time.sleep(wait()[0] / 5)
     pag.keyDown('esc')  # zamknięcie dialogu
     time.sleep(wait()[0] / 15)
     pag.keyUp('esc')
@@ -150,20 +150,21 @@ def clear_map_and_go_to_next_map(game_state,current_map,next_map):
     map_properties = map_data.get(current_map)
     while game_state.current_map.getMapName() == current_map:
         if go_to_closest(map_properties.getMobLocations(),game_state):
-            pag.moveTo(1200 + random_pos() * 10, 1000 + random_pos() * 10)
+            pag.moveTo(1200 + random_pos() * 500, 1000 + random_pos() * 500)
             find_player_near_mob(game_state)
             time.sleep(wait()[0]/2)
             attack_mob()
-            time.sleep(0.4+wait()[0]/10)
+            time.sleep(0.4+wait()[0]/5)
         else:
             if current_map == "Rozlewisko Kai": #wyjatek dla trasy, teleportujacy na kwiaty i sprzedjacy itemy
+                time.sleep(wait()[0])
                 tp_kwiaty()
                 game_state.setGameState({"map_name": next_map}) #aktualizacja info
                 current_map = next_map
                 return next_map
             x,y = transfer_coords_to_pixels_XY(map_properties.getNextMapCoords(),game_state)
             click(x+random_pos(),y+random_pos())
-            pag.moveTo(1200 + random_pos() * 10, 1000 + random_pos() * 10)
+            pag.moveTo(1200 + random_pos() * 500, 1000 + random_pos() * 500)
             game_state.setGameState({"map_name": next_map})
             current_map = next_map
             return next_map
