@@ -103,7 +103,7 @@ def find_player_at_passage(passage,game_state):
                 game_state.player_coords.setPlayerXY(XY_coords[0],XY_coords[1])
                 print(f"Player found at entrance at: {game_state.player_coords.getPlayerXY()} at map {game_state.current_map.getMapName()}")
                 return
-        time.sleep(0.2)
+        time.sleep(0.5+wait()[0])
 
 
 def path_length(x1,y1,x2,y2):
@@ -120,9 +120,9 @@ def print_route(game_state):
     print(f"Travelling from {game_state.player_coords.getPlayerXY()} to {game_state.mob_coords.getMobXY()} at map {game_state.current_map.getMapName()}")
 
 
-def find_shortest_coords(passage,game_state):
+def find_shortest_coords(mob_coords,game_state):
     shortestPath = 999
-    for XY_coords in passage:
+    for XY_coords in mob_coords:
         if not check_mob(XY_coords[0],XY_coords[1],game_state):
             continue
 
@@ -135,7 +135,7 @@ def find_shortest_coords(passage,game_state):
             shortestPath = 998
             break
         ######
-
+        #print(f"Checking path from {game_state.player_coords.getPlayerXY()} to {XY_coords} at map {game_state.current_map.getMapName()}")
         currentPath = path_length(game_state.player_coords.getPlayerX(),game_state.player_coords.getPlayerY(),XY_coords[0],XY_coords[1])
         if  currentPath < shortestPath:
             shortestPath = currentPath
@@ -145,8 +145,18 @@ def find_shortest_coords(passage,game_state):
         return False
     return shortestPathCords
 
+def go_to_closest(mob_coords,game_state):
+    shortest_path_coords = find_shortest_coords(mob_coords,game_state)
+    if not shortest_path_coords:
+       return 0
+    game_state.mob_coords.setMobXY(shortest_path_coords[0],shortest_path_coords[1])
+    x,y = transfer_coords_to_pixels_XY(game_state.mob_coords.getMobXY(),game_state)
+    print_route(game_state)
+    pag.click(x+random_pos(),y+random_pos())
+    return 1
 
 def clear_map_and_go_to_next_map(game_state,current_map,next_map):
+    print(game_state.getGameState())
     map_properties = map_data.get(current_map)
     while game_state.current_map.getMapName() == current_map:
         if go_to_closest(map_properties.getMobLocations(),game_state):
@@ -170,16 +180,6 @@ def clear_map_and_go_to_next_map(game_state,current_map,next_map):
             return next_map
 
 
-
-def go_to_closest(passage,game_state):
-    shortest_path_coords = find_shortest_coords(passage,game_state)
-    if not shortest_path_coords:
-       return 0
-    game_state.mob_coords.setMobXY(shortest_path_coords[0],shortest_path_coords[1])
-    x,y = transfer_coords_to_pixels_XY(game_state.mob_coords.getMobXY(),game_state)
-    print_route(game_state)
-    pag.click(x+random_pos(),y+random_pos())
-    return 1
 
 def find_player_near_mob(game_state):
     print("Waiting for player")
