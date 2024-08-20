@@ -44,15 +44,15 @@ def start_game():
     print(game_state.getGameState())
 
     while running:
-        game_state.current_map.setMapName(clearMap(game_state, "Gvar Hamryd", "Matecznik Szelestu")) 
-        FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
+        game_state.current_map.setMapName(clear_map_and_go_to_next_map(game_state, "Gvar Hamryd", "Matecznik Szelestu")) 
+        find_player_at_passage(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
 
-        game_state.current_map.setMapName(clearMap(game_state, "Matecznik Szelestu", "Rozlewisko Kai"))
-        FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
+        game_state.current_map.setMapName(clear_map_and_go_to_next_map(game_state, "Matecznik Szelestu", "Rozlewisko Kai"))
+        find_player_at_passage(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
 
-        game_state.current_map.setMapName(clearMap(game_state, "Rozlewisko Kai", "Gvar Hamryd"))
-        sellItemsuTuni()
-        FindPlayerAtEntrance(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
+        game_state.current_map.setMapName(clear_map_and_go_to_next_map(game_state, "Rozlewisko Kai", "Gvar Hamryd"))
+        sell_items_tunia()
+        find_player_at_passage(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
 
         if not running:
             break
@@ -81,13 +81,12 @@ def create_gui():
     root.mainloop()
 
 if __name__ == "__main__":
-    create_gui()
+    start_game()
 #"""       
 ##########################DO DEBUGOWANIA#############################
 ##threading 
-##przejscia w funkcji u tuni
+##przejscia w funkcji u tuni#naprawione, do testow
 ##rozpoczynanie routow
-##srodek mobka sprawdzac
     
 """
 time.sleep(5)

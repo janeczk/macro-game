@@ -81,34 +81,10 @@ map_data = {
     ),
 }
 
-playerColor = (255,255,255)
-mobColor = (235,12,12)
-"""
-przejsciaGH = [[63,42],[63,41],[11,0],[12,0],[0,79],[0,80]]
-przejsciaMS = [[63,79],[63,80],[22,0],[23,0]]
-przejsciaLR = [[22,63],[23,63],[75,63],[76,63],[95,38],[95,39]]
+player_color = (255,255,255)
+mob_color = (235,12,12)
 
-driadyGH=[[25,15],[52,43],[53,36],[54,23],[46,19],[44,42],[39,46],[42,54],[45,52],
-[55,53],[53,60],[48,67],[40,68],[38,75],[32,73],[31,80],[37,85],[45,86],
-[22,88],[12,89],[17,82],[8,79],[15,72],[16,63],[12,69],[48,83],[35,77],
-[33,61],[34,49],[26,42],[20,49],[3,59],[4,68],[9,67],[14,47],[44,66],[17,51],
-[6,43],[19,32],[8,30],[16,24],[8,17],[17,14],[13,5],[30,47],
-[59,42],[55,28],[53,17],[50,51],[38,51],[37,57],[38,63],[29,64],
-[23,73],[49,77],[23,83],[3,80],[7,62],[12,58],[11,53],[25,46],[28,37]
-,[24,33],[12,28],[12,13],[19,4],[56,34]]
-driadyMS = [[61,77],[51,78],[57,79],[40,83],[43,79],[35,82],[37,86],[32,74],[24,83],[24,83],[27,91],[22,93],[18,75]
-            ,[21,79],[23,73],[16,85],[6,81],[7,76],[29,70],[26,64],[33,66],[40,67],[44,69],[50,63]
-            ,[45,58],[49,55],[52,51],[36,54],[29,55],[35,46],[34,39],[25,51],[20,58],[16,59],[14,63],[7,57]
-            ,[14,53],[13,47],[21,50],[17,41],[14,39],[7,38],[10,35],[17,29],[20,24],[18,18],[23,21],[27,20]
-            ,[34,18],[37,21],[47,17],[36,12],[26,13],[51,24],[57,30],[58,38],[59,43],[62,47],[52,18],[56,15]
-            ,[58,8],[24,6],[19,5],[50,83],[17,44]
-            ]
-driadyLR =[[22,57],[28,56],[14,51],[22,44],[20,48],[13,39],[8,36],[28,40],[31,43],
-           [27,32],[23,27],[18,24],[17,13],[45,40],[53,47],[57,41],[63,38],[66,31],
-           [68,23],[70,43],[75,52],[82,53],[74,60],]
-
-"""
-class startMiniMap:
+class StartMiniMap:
     def __init__(self):
         self.x = 0
         self.y = 0
@@ -120,7 +96,7 @@ class startMiniMap:
         self.x = x
         self.y = y
 
-class endMiniMap:
+class EndMiniMap:
     def __init__(self):
         self.x = 0
         self.y = 0
@@ -132,7 +108,7 @@ class endMiniMap:
         self.x = x
         self.y = y
 
-class mapSize:
+class MapSize:
     def __init__(self):
         self.x = 0
         self.y = 0
@@ -146,12 +122,12 @@ class mapSize:
         self.x = x
         self.y = y
 
-    def calculateStepX(self, startMiniMap, endMiniMap):
-        self.stepX = (endMiniMap.getEndMiniMap()[0] - startMiniMap.getStartMiniMap()[0]) / self.x
+    def calculateStepX(self, start_mini_map, end_mini_map):
+        self.stepX = (end_mini_map.getEndMiniMap()[0] - start_mini_map.getStartMiniMap()[0]) / self.x
         return self.stepX
     
-    def calculateStepY(self, startMiniMap, endMiniMap):
-        self.stepY = (endMiniMap.getEndMiniMap()[1] - startMiniMap.getStartMiniMap()[1]) / self.y
+    def calculateStepY(self, start_mini_map, end_mini_map):
+        self.stepY = (end_mini_map.getEndMiniMap()[1] - start_mini_map.getStartMiniMap()[1]) / self.y
         return self.stepY
 
     def getStepX(self):
@@ -171,7 +147,7 @@ class CurrentMap:
         self.name = name
 
 
-class koordynatyGracza:
+class PlayerCoords:
     def __init__(self): 
         self.x = 62
         self.y = 42
@@ -195,7 +171,7 @@ class koordynatyGracza:
         self.x = x
         self.y = y
 
-class koordynatyMoba:
+class MobCoords:
     def __init__(self):
         self.x = 0
         self.y = 0
@@ -222,33 +198,33 @@ class koordynatyMoba:
 class GameState:
     def __init__(self):
         self.current_map = CurrentMap() 
-        self.player_coords = koordynatyGracza() 
-        self.mob_coords = koordynatyMoba() 
-        self.startMiniMap = startMiniMap()
-        self.endMiniMap = endMiniMap()
-        self.mapSize = mapSize()
+        self.player_coords = PlayerCoords() 
+        self.mob_coords = MobCoords() 
+        self.start_mini_map = StartMiniMap()
+        self.end_mini_map = EndMiniMap()
+        self.map_size = MapSize()
 
     def getGameState(self):
         return {
             "map_name": self.current_map.getMapName(),
             "player_coords": self.player_coords.getPlayerXY(),
             "mob_coords": self.mob_coords.getMobXY(),
-            "start_mini_map": self.startMiniMap.getStartMiniMap(),
-            "end_mini_map": self.endMiniMap.getEndMiniMap(),
-            "map_size": self.mapSize.getMapSize(),
-            "step_x": self.mapSize.getStepX(),
-            "step_y": self.mapSize.getStepY()
+            "start_mini_map": self.start_mini_map.getStartMiniMap(),
+            "end_mini_map": self.end_mini_map.getEndMiniMap(),
+            "map_size": self.map_size.getMapSize(),
+            "step_x": self.map_size.getStepX(),
+            "step_y": self.map_size.getStepY()
         }
     def setGameState(self, game_state):
         self.current_map.setMapName(game_state["map_name"])
 
         current_map_properties = map_data.get(game_state["map_name"])
 
-        self.startMiniMap.setStartMiniMap(current_map_properties.getStartMiniMap()[0], current_map_properties.getStartMiniMap()[1])
-        self.endMiniMap.setEndMiniMap(current_map_properties.getEndMiniMap()[0], current_map_properties.getEndMiniMap()[1])
-        self.mapSize.setMapSize(current_map_properties.getMapSize()[0], current_map_properties.getMapSize()[1])
+        self.start_mini_map.setStartMiniMap(current_map_properties.getStartMiniMap()[0], current_map_properties.getStartMiniMap()[1])
+        self.end_mini_map.setEndMiniMap(current_map_properties.getEndMiniMap()[0], current_map_properties.getEndMiniMap()[1])
+        self.map_size.setMapSize(current_map_properties.getMapSize()[0], current_map_properties.getMapSize()[1])
 
-        self.mapSize.calculateStepX(self.startMiniMap, self.endMiniMap)
-        self.mapSize.calculateStepY(self.startMiniMap, self.endMiniMap)
+        self.map_size.calculateStepX(self.start_mini_map, self.end_mini_map)
+        self.map_size.calculateStepY(self.start_mini_map, self.end_mini_map)
 
 
