@@ -15,6 +15,7 @@ import threading
 #print(const.driadyGH[53])
 #print(pag.pixel(int(const.startGH.x + (const.driadyGH[53][0]+0.5)* const.xStepGH),int(const.startGH.y + (const.driadyGH[53][1]+0.5)*const.yStepGH)))
 #pag.moveTo(int(const.startGH.x + (const.driadyGH[53][0]+0.5)* const.xStepGH),int(const.startGH.y + (const.driadyGH[53][1]+0.5)*const.yStepGH))
+print(len(const.map_data.get("Matecznik Szelestu").getMobLocations()))
 """
 for i in const.driadyMS:
     x = i[0]
