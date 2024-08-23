@@ -37,6 +37,27 @@ class MapProperties:
 
     def getNextMapCoords(self):
         return self.nextMapCoords
+    
+class EqProperties:
+    def __init__(self,start_eq_coords,end_eq_coords,eq_size):
+        self.startEqCoords = start_eq_coords
+        self.endEqCoords = end_eq_coords
+        self.eqSize = eq_size
+        self.step_eq_X = (end_eq_coords[0] - start_eq_coords[0])/eq_size[0]
+        self.step_eq_Y = (end_eq_coords[1] - start_eq_coords[1])/eq_size[1]
+    def getStartEqCoords(self):
+        return self.startEqCoords
+    def getEndEqCoords(self):
+        return self.endEqCoords
+    def getEqSize(self):
+        return self.eqSize
+
+
+eq_properties = EqProperties(
+    start_eq_coords=[2054, 534],
+    end_eq_coords=[2343, 782],
+    eq_size=[7,6]
+)
 
 map_data = {
     "Gvar Hamryd": MapProperties(
@@ -78,7 +99,7 @@ map_data = {
         next_map_coords=[75, 63] 
     ),
 }
-
+przekaznik = 0
 player_color = (255,255,255)
 mob_color = (235,12,12)
 

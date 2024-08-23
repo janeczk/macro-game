@@ -42,7 +42,7 @@ def start_game():
     game_state = const.GameState()
     game_state.setGameState({"map_name": "Gvar Hamryd",})
     print(game_state.getGameState())
-
+    time.sleep(2)
     while running:
         game_state.current_map.setMapName(clear_map_and_go_to_next_map(game_state, "Gvar Hamryd", "Matecznik Szelestu")) 
         find_player_at_passage(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
@@ -51,7 +51,7 @@ def start_game():
         find_player_at_passage(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
 
         game_state.current_map.setMapName(clear_map_and_go_to_next_map(game_state, "Rozlewisko Kai", "Gvar Hamryd"))
-        sell_items_tunia()
+        #sell_items_tunia()
         find_player_at_passage(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
 
 
