@@ -267,10 +267,12 @@ def click_enter():
     pag.keyDown('enter')
     time.sleep(wait()[0]/10)
     pag.keyUp('enter')
+
 def click_keyboard(button):
     pag.keyDown(button)
     time.sleep(wait()[0]/10)
     pag.keyUp(button)
+    
 def click_1():
     pag.keyDown('1')  # wejście w dialog
     time.sleep(wait()[0] / 15)
