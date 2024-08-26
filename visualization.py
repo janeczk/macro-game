@@ -12,8 +12,12 @@ import func
 import const
 import threading
 
-arr = []
-for i in range(100000):
-    arr.append(round(func.wait()[0],4))
-plt.hist(arr,bins=200,range=[0,2])
-plt.show() 
+
+def create_hist(n):
+    arr = []
+    for i in range(n):
+        arr.append(func.wait())
+    plt.hist(arr,bins=100,range=[0,2])
+    plt.show() 
+
+create_hist(10000)
