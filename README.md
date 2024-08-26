@@ -33,7 +33,7 @@ create_hist(1000000) #uzycie milion razy funkcji wait() i jej wizualizacja
 
 
     
-![png](output_5_0.png)
+![png](jpgs/output_5_0.png)
     
 
 
