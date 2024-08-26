@@ -19,5 +19,3 @@ def create_hist(n):
         arr.append(func.wait())
     plt.hist(arr,bins=100,range=[0,2])
     plt.show() 
-
-create_hist(10000)

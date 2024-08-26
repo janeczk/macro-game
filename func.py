@@ -15,7 +15,7 @@ def wait():
     x = np.random.normal(0.5,0.3,1)
     if x < 0 :  return float(-x + random.randrange(0,200)/1000)
     if x < 0.1 :return float(x + random.randrange(50,200)/1000) 
-    if x > 1.5 : return float(x - random.randrange(0,500)/1000)
+    if x > 1.2 : return float(x - random.randrange(0,500)/1000)
     return float(x)
 
 def random_pos():
