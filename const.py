@@ -37,6 +37,13 @@ class MapProperties:
 
     def getNextMapCoords(self):
         return self.nextMapCoords
+    def printMapProperties(self):
+        print("startMiniMap: ", self.startMiniMap)
+        print("endMiniMap: ", self.endMiniMap)
+        print("mapSize: ", self.mapSize)
+        print("transitions: ", self.transitions)
+        print("mob_locations: ", self.mob_locations)
+        print("nextMapCoords: ", self.nextMapCoords)
     
 class EqProperties:
     def __init__(self,start_eq_coords,end_eq_coords,eq_size):
