@@ -14,13 +14,14 @@ from visualization import *
 ## Time Between Player Actions
 The `wait()` function is designed to mimic the average time a player typically takes to perform actions. It uses a normal distribution with appropriate parameters. The graph represents the time distribution for one million attempts. As shown, about 90% of the results fall between 0.1 and 0.8 seconds, realistically reflecting the time between player actions. In the program, these times are treated as vectors, meaning they can be scaled by multiplying or dividing by constants to optimize specific parts of the program.
 
+```python
 def wait():
     x = np.random.normal(0.5,0.3,1)
     if x < 0 :  return float(-x + random.randrange(0,200)/1000)
     if x < 0.1 :return float(x + random.randrange(50,200)/1000) 
     if x > 1.2 : return float(x - random.randrange(0,500)/1000)
     return float(x)
-
+```
 
 ```python
 create_hist(1000000) #using function wait() for milion times and visualization
