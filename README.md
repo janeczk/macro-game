@@ -48,7 +48,7 @@ By using a dictionary where the keys represent unique map names, it became possi
 
 
 ```python
-print(map_data["Gvar Hamryd"].printMapProperties())
+map_data["Gvar Hamryd"].printMapProperties()
 ```
 
     startMiniMap:  [142, 118]
