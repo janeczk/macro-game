@@ -124,24 +124,29 @@ def clear_map_and_go_to_next_map(game_state,current_map,next_map):
 
 def find_player_near_mob(game_state):
     print("Waiting for player")
+    sleep(0.05)
     while True:
         x,y = transfer_coords_to_pixels_XY(game_state.mob_coords.getMobXY(),game_state)
-        if pag.pixelMatchesColor(int(x-game_state.map_size.getStepX()),int(y),player_color,tolerance=15):#sprawdzanie pozycji gracza w pozycji krzyza dookola moba
+        if check_pixel_color(x-game_state.map_size.getStepX(),y):#sprawdzanie pozycji gracza w pozycji krzyza dookola moba
             game_state.player_coords.setPlayerXY(game_state.mob_coords.getMobX()-1,game_state.mob_coords.getMobY())
             return
-        elif pag.pixelMatchesColor(int(x),int(y-game_state.map_size.getStepY()),player_color,tolerance=15):
+        elif check_pixel_color(x,y-game_state.map_size.getStepY()):
             game_state.player_coords.setPlayerXY(game_state.mob_coords.getMobX(),game_state.mob_coords.getMobY()-1)
             return
-        elif pag.pixelMatchesColor(int(x+game_state.map_size.getStepX()),int(y),player_color,tolerance=15):
+        elif check_pixel_color(x+game_state.map_size.getStepX(),y):
             game_state.player_coords.setPlayerXY(game_state.mob_coords.getMobX()+1,game_state.mob_coords.getMobY())
             return
-        elif pag.pixelMatchesColor(int(x),int(y+game_state.map_size.getStepY()),player_color,tolerance=15):
+        elif check_pixel_color(x,y+game_state.map_size.getStepY()):
             game_state.player_coords.setPlayerXY(game_state.mob_coords.getMobX(),game_state.mob_coords.getMobY()+1)
             return
-        elif pag.pixelMatchesColor(int(x),int(y),player_color,tolerance=15):
+        elif check_pixel_color(x,y):
             game_state.player_coords.setPlayerXY(game_state.mob_coords.getMobX(),game_state.mob_coords.getMobY())
             return
         
+def check_pixel_color(x,y):
+    if pag.pixelMatchesColor(int(x),int(y),player_color,tolerance=15):
+        return True
+    return False
 
 def go_and_auction_items():
 
@@ -286,7 +291,7 @@ def npc_talk():
 def click(x,y):
     pag.moveTo((x,y))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
-    time.sleep(wait()/15)
+    time.sleep(wait()/10)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
 
 def attack_mob():

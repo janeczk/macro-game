@@ -52,6 +52,7 @@ def start_game():
 
         game_state.current_map.setMapName(clear_map_and_go_to_next_map(game_state, "Rozlewisko Kai", "Gvar Hamryd"))
         #sell_items_tunia()
+        go_and_auction_items()
         find_player_at_passage(const.map_data.get(game_state.current_map.getMapName()).getTransitions(), game_state)
 
 
